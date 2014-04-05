@@ -47,11 +47,10 @@ class RedBean_Prefix
 
 		if ( is_null($facade) ) {
 			$writer = new $class(R::$adapter, $prefix);
-
-			R::setWriter($writer);
+			R::configureFacadeWithToolbox(new RedBean_ToolBox(new RedBean_OODB($writer), R::$adapter, $writer));
+			//R::setWriter($writer);
 		} else {
 			$writer = new $class($facade::$adapter, $prefix);
-
 			$facade::setWriter($writer);
 		}
 	}
